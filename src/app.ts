@@ -1,9 +1,10 @@
 import express, { type Application, type Request, type Response } from 'express'
 import { initDB, pool } from './db'
 import { userRouter } from './modules/user/user.router'
-import { profileRouter } from './modules/profile/profile. routes'
+import { profileRouter } from './modules/profile/profile.routes'
 import { authRoute } from './modules/auth/auth.route'
-
+import fs from 'fs'
+import logger from './middleware/logger'
 const app: Application = express()
 
 
@@ -16,9 +17,13 @@ app.use(express.text())
 
 
 //user router ke app er sathe use kore dibo
-app.use('/api/users', userRouter)
-app.use('/api/profiles', profileRouter)
-app.use('/api/auth', authRoute)
+app.use('/api/users',userRouter)
+app.use('/api/profiles',profileRouter)
+app.use('/api/auth',authRoute)
+
+
+// new middleware
+app.use(logger)
 
 
 // Home route

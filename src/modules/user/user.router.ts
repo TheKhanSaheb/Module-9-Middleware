@@ -3,6 +3,7 @@ import app from "../../app";
 import { pool } from "./../../db/index";
 import { type Request, type Response } from "express";
 import { userController } from "./user.controller";
+import auth from "../../middleware/auth";
 
 const{ createUser, getAllUsers, getUserById, updateUserById, deleteUserById } = userController
 const router =Router()
@@ -12,7 +13,8 @@ const router =Router()
     router.post('/', userController.createUser)
 
 
-    router.get('/ ', userController.getAllUsers)
+
+    router.get('/', auth(), userController.getAllUsers)
 
     router.get('/:id', userController.getUserById)
 
