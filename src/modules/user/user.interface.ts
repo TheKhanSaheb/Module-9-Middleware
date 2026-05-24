@@ -7,4 +7,6 @@ export interface IUser
     is_active: boolean;
     age?: number;
     created_at: Date;
+    
+    role?: "Admin" | "User" | "Agent"
 }
